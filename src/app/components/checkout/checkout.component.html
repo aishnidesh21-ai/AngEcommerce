@@ -1,0 +1,203 @@
+<div class="checkout-container">
+  <div *ngIf="orderPlaced" class="order-success">
+    <mat-card>
+      <mat-card-content>
+        <mat-icon color="primary" class="success-icon">check_circle</mat-icon>
+        <h2>Thank you for your order!</h2>
+        <p>Your order has been placed successfully. You will receive a confirmation email shortly.</p>
+        <button mat-raised-button color="primary" (click)="continueShopping()">Continue Shopping</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <div *ngIf="!orderPlaced" class="checkout-content">
+    <h1 class="checkout-title">Checkout</h1>
+    
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+      <!-- Personal Information -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Personal Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content formGroupName="personalInfo">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Full Name</mat-label>
+              <input matInput formControlName="name" placeholder="John Doe">
+              <mat-error *ngIf="personalInfo?.get('name')?.invalid && personalInfo?.get('name')?.touched">
+                Full name is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" placeholder="example@email.com" type="email">
+              <mat-error *ngIf="personalInfo?.get('email')?.invalid && personalInfo?.get('email')?.touched">
+                <span *ngIf="personalInfo?.get('email')?.errors?.['required']">Email is required</span>
+                <span *ngIf="personalInfo?.get('email')?.errors?.['email']">Please enter a valid email</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phone" placeholder="(123) 456-7890" type="tel">
+              <mat-error *ngIf="personalInfo?.get('phone')?.invalid && personalInfo?.get('phone')?.touched">
+                Phone number is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+      <!-- Shipping Address -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Shipping Address</mat-card-title>
+        </mat-card-header>
+        <mat-card-content formGroupName="shippingAddress">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Street Address</mat-label>
+              <input matInput formControlName="street" placeholder="123 Main St">
+              <mat-error *ngIf="shippingAddress?.get('street')?.invalid && shippingAddress?.get('street')?.touched">
+                Street address is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-row address-row">
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city" placeholder="City">
+              <mat-error *ngIf="shippingAddress?.get('city')?.invalid && shippingAddress?.get('city')?.touched">
+                City is required
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+              <mat-label>State/Province</mat-label>
+              <input matInput formControlName="state" placeholder="State">
+              <mat-error *ngIf="shippingAddress?.get('state')?.invalid && shippingAddress?.get('state')?.touched">
+                State is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-row address-row">
+            <mat-form-field appearance="outline">
+              <mat-label>ZIP/Postal Code</mat-label>
+              <input matInput formControlName="zipCode" placeholder="12345">
+              <mat-error *ngIf="shippingAddress?.get('zipCode')?.invalid && shippingAddress?.get('zipCode')?.touched">
+                ZIP code is required
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+              <mat-label>Country</mat-label>
+              <input matInput formControlName="country" placeholder="Country">
+              <mat-error *ngIf="shippingAddress?.get('country')?.invalid && shippingAddress?.get('country')?.touched">
+                Country is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+      <!-- Payment Method -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Payment Method</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="payment-methods">
+            <mat-radio-group formControlName="paymentMethod">
+              <mat-radio-button *ngFor="let method of paymentMethods" [value]="method.id" class="payment-method">
+                {{ method.name }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          
+          <!-- Card Information (shown only for card payment methods) -->
+          <div *ngIf="paymentMethod?.value === 'credit' || paymentMethod?.value === 'debit'" formGroupName="cardInfo" class="card-info">
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Card Number</mat-label>
+                <input matInput formControlName="cardNumber" placeholder="1234 5678 9012 3456">
+                <mat-icon matSuffix>credit_card</mat-icon>
+                <mat-error *ngIf="cardInfo?.get('cardNumber')?.invalid && cardInfo?.get('cardNumber')?.touched">
+                  Card number is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Name on Card</mat-label>
+                <input matInput formControlName="nameOnCard" placeholder="John Doe">
+                <mat-error *ngIf="cardInfo?.get('nameOnCard')?.invalid && cardInfo?.get('nameOnCard')?.touched">
+                  Name on card is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div class="form-row payment-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Expiry Date</mat-label>
+                <input matInput formControlName="expiryDate" placeholder="MM/YY">
+                <mat-error *ngIf="cardInfo?.get('expiryDate')?.invalid && cardInfo?.get('expiryDate')?.touched">
+                  Expiry date is required
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline">
+                <mat-label>CVV</mat-label>
+                <input matInput formControlName="cvv" placeholder="123" type="password">
+                <mat-error *ngIf="cardInfo?.get('cvv')?.invalid && cardInfo?.get('cvv')?.touched">
+                  <span *ngIf="cardInfo?.get('cvv')?.errors?.['required']">CVV is required</span>
+                  <span *ngIf="cardInfo?.get('cvv')?.errors?.['minlength'] || cardInfo?.get('cvv')?.errors?.['maxlength']">CVV must be 3-4 digits</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+      <div class="form-actions">
+        <button mat-button type="button" (click)="backToCart()">
+          <mat-icon>arrow_back</mat-icon>
+          Back to Cart
+        </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">
+          <mat-icon>payment</mat-icon>
+          {{ isSubmitting ? 'Processing...' : 'Place Order' }}
+        </button>
+      </div>
+    </form>
+    
+    <mat-card class="order-summary">
+      <mat-card-header>
+        <mat-card-title>Order Summary</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>{{ cartTotal | currency:'INR':'symbol':'1.2-2':'en-IN' }}</span>
+        </div>
+        
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>Free</span>
+        </div>
+        
+        <div class="summary-row total">
+          <span>Total</span>
+          <span>{{ cartTotal | currency:'INR':'symbol':'1.2-2':'en-IN' }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

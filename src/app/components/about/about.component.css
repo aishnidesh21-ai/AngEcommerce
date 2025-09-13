@@ -1,0 +1,151 @@
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+.about-header-card {
+  margin-bottom: 24px;
+  background: linear-gradient(rgba(217, 208, 226, 0.8), rgba(103, 58, 183, 0.8)),
+    url('https://media.istockphoto.com/id/2061836383/photo/items-purchased-through-online-shopping-are-delivered-3d-rendering.webp?b=1&s=170667a&w=0&k=20&c=-poEjDfXHQv4bBSJ6FiOwCQ0BE-24C7AAzDIBmcy4mU=')
+    center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  border-radius: 12px;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.about-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.about-section {
+  margin-bottom: 40px;
+}
+
+.mission-vision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.values-section,
+.team-section {
+  margin-bottom: 40px;
+}
+
+.values-section h2,
+.team-section h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #673ab7;
+  font-weight: bold;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.value-card {
+  text-align: center;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.value-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  margin: 16px auto;
+  color: #673ab7;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.team-card {
+  height: 100%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.team-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.team-avatar mat-icon {
+  font-size: 64px;
+  height: 64px;
+  width: 64px;
+  color: #673ab7;
+}
+
+.team-card h3 {
+  margin-bottom: 4px;
+  color: #673ab7;
+  text-align: center;
+  font-weight: bold;
+}
+
+.team-card h4 {
+  margin-bottom: 16px;
+  color: #9e9e9e;
+  text-align: center;
+}
+
+mat-divider {
+  margin: 16px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .mission-vision {
+    grid-template-columns: 1fr;
+  }
+
+  .values-grid,
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 2rem;
+  }
+
+  .values-grid,
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}

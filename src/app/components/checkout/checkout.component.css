@@ -1,0 +1,112 @@
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+.order-success {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.success-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  margin-bottom: 16px;
+}
+
+.checkout-title {
+  margin-bottom: 24px;
+}
+
+.checkout-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.checkout-form {
+  grid-column: 1;
+}
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+.form-row {
+  margin-bottom: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.address-row, .payment-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.payment-methods {
+  margin-bottom: 16px;
+}
+
+.payment-method {
+  margin-right: 16px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.card-info {
+  margin-top: 16px;
+}
+
+.order-summary {
+  grid-column: 2;
+  height: fit-content;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.summary-row.total {
+  font-weight: 500;
+  font-size: 1.2rem;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .checkout-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .checkout-form {
+    grid-column: 1;
+    order: 2;
+  }
+  
+  .order-summary {
+    grid-column: 1;
+    order: 1;
+    margin-bottom: 24px;
+  }
+  
+  .address-row, .payment-row {
+    grid-template-columns: 1fr;
+  }
+}

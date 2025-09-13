@@ -1,0 +1,80 @@
+<div class="product-detail-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <mat-card>
+      <mat-card-content>
+        <mat-icon color="warn">error</mat-icon>
+        <span>Error loading product details. Please try again later.</span>
+        <button mat-button color="primary" (click)="goBack()">Back to Products</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <div *ngIf="!loading && !error && product" class="product-content">
+    <mat-card class="product-images-card">
+      <img mat-card-image [src]="product.imageUrl" [alt]="product.name" class="main-image">
+    </mat-card>
+    
+    <mat-card class="product-info-card">
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <button mat-icon-button (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon> 
+        </button>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="product-meta">
+          <div class="product-price">{{ product.price | currency }}</div>
+          <div class="product-rating">
+            <mat-icon *ngFor="let star of [1,2,3,4,5]" 
+                     [color]="star <= product.rating ? 'accent' : ''">
+              {{ star <= product.rating ? 'star' : 'star_border' }}
+            </mat-icon>
+          </div>
+          <div class="product-availability" [class.out-of-stock]="!product.inStock">
+            <mat-icon [color]="product.inStock ? 'primary' : 'warn'">
+              {{ product.inStock ? 'check_circle' : 'cancel' }}
+            </mat-icon>
+            {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+          </div>
+        </div>
+        
+        <div class="product-description">
+          <h2>Description</h2>
+          <p>{{ product.description }}</p>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions *ngIf="product.inStock">
+        <div class="product-actions">
+          <div class="quantity-selector">
+            <button mat-icon-button (click)="decrementQuantity()" [disabled]="quantity <= 1">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span class="quantity">{{ quantity }}</span>
+            <button mat-icon-button (click)="incrementQuantity()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="action-buttons">
+            <button mat-raised-button color="primary" (click)="addToCart()">
+              <mat-icon>add_shopping_cart</mat-icon>
+              Add to Cart - {{ product.price * quantity | currency }}
+            </button>
+            <button mat-icon-button color="warn" (click)="toggleWishlist()" class="wishlist-button">
+              <mat-icon>{{ isInWishlist ? 'favorite' : 'favorite_border' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-actions>
+      
+      <mat-card-footer *ngIf="!product.inStock" class="out-of-stock-message">
+        <p>This product is currently out of stock. Please check back later.</p>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="home-container">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to Our Online Store</h1>
+      <p>Discover the latest trends and best deals</p>
+      <button mat-raised-button color="accent" routerLink="/products">Shop Now</button>
+    </div>
+
+    <!-- Carousel Images -->
+    <img *ngFor="let img of heroImages; let i = index"
+         [src]="img"
+         [class.active]="i === currentHero">
+  </section>
+
+
+  <section class="categories">
+  <h2>🛍 Shop by Category 🛍</h2>
+  <div class="category-grid">
+    <mat-card class="category-card" routerLink="/products" [queryParams]="{category: 'clothing', subcategory: 'men'}">
+      <mat-card-content>
+        <div class="category-image">
+          <img src="https://static.vecteezy.com/system/resources/previews/023/605/941/non_2x/mens-cloth-logo-design-vector.jpg" alt="Men's Fashion">
+        </div>
+        <h3>Men's Fashion</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="category-card" routerLink="/products" [queryParams]="{category: 'clothing', subcategory: 'women'}">
+      <mat-card-content>
+        <div class="category-image">
+          <img src="https://tse4.mm.bing.net/th/id/OIP.G90sEpGcok6kwiIkMH5XywHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Women's Fashion">
+        </div>
+        <h3>Women's Fashion</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="category-card" routerLink="/products" [queryParams]="{category: 'clothing', subcategory: 'kids'}">
+      <mat-card-content>
+        <div class="category-image">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/f0c50a95186315.5e9178d370dad.jpg" alt="Kids Wear">
+        </div>
+        <h3>Kids Wear</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="category-card" routerLink="/products" [queryParams]="{category: 'beauty'}">
+      <mat-card-content>
+        <div class="category-image">
+          <img src="https://i.pinimg.com/736x/e0/e9/f9/e0e9f9ee896b4f834492ffcc1a50f27c.jpg" alt="Beauty Products">
+        </div>
+        <h3>Beauty Products</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="category-card" routerLink="/products" [queryParams]="{category: 'accessories'}">
+      <mat-card-content>
+        <div class="category-image">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.gTL8slbMd6AiS_RioTPBigHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Accessories">
+        </div>
+        <h3>Accessories</h3>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
+
+
+
+  <section class="featured-products">
+    <h2>🛒 Featured Products 🛒</h2>
+    
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    
+    <div *ngIf="error" class="error">
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="warn">error</mat-icon>
+          <p>Error loading products. Please try again later.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    
+    <div *ngIf="!loading && !error" class="product-grid">
+      <mat-card *ngFor="let product of featuredProducts" class="product-card">
+        <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
+        <mat-card-content>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle class="product-price">{{ product.price | currency:'INR':'symbol':'1.2-2':'en-IN' }}</mat-card-subtitle>
+          <div class="product-rating">
+            <mat-icon *ngFor="let star of [1,2,3,4,5]" 
+                     [color]="star <= product.rating ? 'accent' : ''">
+              {{ star <= product.rating ? 'star' : 'star_border' }}
+            </mat-icon>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" [routerLink]="['/product', product.id]">View Details</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Trusted Brands Section -->
+  <section class="trusted-brands">
+    <h2>♚ Trusted Clothing Brands ♚</h2>
+    <div class="brand-slider">
+      <div class="brand-track">
+        <div class="brand" *ngFor="let brand of brands">
+          <img [src]="brand.logo" [alt]="brand.name">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

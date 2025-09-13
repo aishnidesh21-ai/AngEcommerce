@@ -1,0 +1,110 @@
+<div class="contact-container">
+  <mat-card class="contact-header-card">
+    <mat-card-content>
+      <h1 class="contact-title">Contact Us</h1>
+      <p class="contact-subtitle">We'd love to hear from you!</p>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="contact-content">
+    <div class="contact-info-section">
+      <mat-card>
+        <mat-card-content>
+          <h2>Get In Touch</h2>
+          
+          <div class="contact-info-item">
+            <mat-icon>location_on</mat-icon>
+            <div>
+              <h3>Address</h3>
+              <p>{{ contactInfo.address }}</p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <mat-icon>email</mat-icon>
+            <div>
+              <h3>Email</h3>
+              <p>{{ contactInfo.email }}</p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <mat-icon>phone</mat-icon>
+            <div>
+              <h3>Phone</h3>
+              <p>{{ contactInfo.phone }}</p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <mat-icon>access_time</mat-icon>
+            <div>
+              <h3>Business Hours</h3>
+              <p>{{ contactInfo.hours }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="contact-form-section">
+      <mat-card>
+        <mat-card-content>
+          <h2>Send Us a Message</h2>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" placeholder="Your Name">
+              <mat-error *ngIf="submitted && f['name'].errors">
+                <span *ngIf="f['name'].errors['required']">Name is required</span>
+                <span *ngIf="f['name'].errors['minlength']">Name must be at least 2 characters</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" placeholder="Your Email">
+              <mat-error *ngIf="submitted && f['email'].errors">
+                <span *ngIf="f['email'].errors['required']">Email is required</span>
+                <span *ngIf="f['email'].errors['email']">Please enter a valid email address</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Subject</mat-label>
+              <input matInput formControlName="subject" placeholder="Subject">
+              <mat-error *ngIf="submitted && f['subject'].errors">
+                <span *ngIf="f['subject'].errors['required']">Subject is required</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Message</mat-label>
+              <textarea matInput formControlName="message" rows="5" placeholder="Your Message"></textarea>
+              <mat-error *ngIf="submitted && f['message'].errors">
+                <span *ngIf="f['message'].errors['required']">Message is required</span>
+                <span *ngIf="f['message'].errors['minlength']">Message must be at least 10 characters</span>
+              </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon>send</mat-icon> Send Message
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-grid">
+      <mat-card *ngFor="let faq of faqItems" class="faq-card">
+        <mat-card-content>
+          <h3>{{ faq.question }}</h3>
+          <p>{{ faq.answer }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,137 @@
+.wishlist-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+.wishlist-header-card {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(217, 208, 226, 0.8), rgba(98, 32, 212, 0.8)),
+              url('https://millardsewing.com/wp-content/uploads/2023/11/Wishlist.png')
+              center/cover no-repeat;
+  color: rgb(240, 234, 234);
+  text-align: center;
+  padding: 50px 5px;
+  border-radius: 12px;
+}
+
+.wishlist-header-title {
+  margin-bottom: 20px; /* button ke liye space */
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.wishlist-header-card button {
+  margin-top: 10px; /* heading se distance */
+  background: linear-gradient(rgba(88, 28, 148, 0.8), rgba(79, 9, 219, 0.8));
+  color: #d32f2f;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wishlist-header-card button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* existing styles */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.error, .empty-wishlist {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.empty-wishlist mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  margin-bottom: 16px;
+  color: #9e9e9e;
+}
+
+.empty-wishlist p {
+  margin-bottom: 16px;
+  font-size: 18px;
+  color: #616161;
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.wishlist-card {
+  height: 100%;
+  display: contents;
+  flex-direction: column;
+}
+
+.wishlist-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.wishlist-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.out-of-stock {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(244, 67, 54, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.product-rating {
+  display: flex;
+  margin: 8px 0;
+}
+
+.product-price {
+  color: #673ab7;
+  font-weight: 500;
+}
+
+.date-added {
+  font-size: 0.8rem;
+  color: #757575;
+  margin-top: 8px;
+}
+
+mat-card-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .wishlist-grid {
+    grid-template-columns: 1fr;
+  }
+}

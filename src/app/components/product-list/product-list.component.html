@@ -1,0 +1,83 @@
+<div class="product-list-container">
+  <mat-card class="product-header-card">
+    <mat-card-content>
+      <h1 class="product-header-title">
+        <ng-container *ngIf="categoryFilter && subcategoryFilter">
+          {{ (subcategoryFilter | titlecase) + ' ' + (categoryFilter | titlecase) }}
+        </ng-container>
+        <ng-container *ngIf="categoryFilter && !subcategoryFilter">
+          {{ (categoryFilter | titlecase) + ' Products' }}
+        </ng-container>
+        <ng-container *ngIf="!categoryFilter && subcategoryFilter">
+          {{ (subcategoryFilter | titlecase) + ' Products' }}
+        </ng-container>
+        <ng-container *ngIf="!categoryFilter && !subcategoryFilter">
+          All Products
+        </ng-container>
+      </h1>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search products</mat-label>
+        <input matInput
+          [(ngModel)]="searchTerm"
+          placeholder="Search products..."
+          (keyup.enter)="onSearch()"
+        >
+        <button mat-icon-button matSuffix (click)="onSearch()">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <mat-card>
+      <mat-card-content>
+        <mat-icon color="warn">error</mat-icon>
+        <p>Error loading products. Please try again later.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!loading && !error && filteredProducts.length === 0" class="no-products">
+    <mat-card>
+      <mat-card-content>
+        <mat-icon>search_off</mat-icon>
+        <p>No products found matching your criteria.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <div *ngIf="!loading && !error" class="product-grid">
+    <mat-card *ngFor="let product of filteredProducts" class="product-card">
+      <div class="product-image">
+        <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
+        <span *ngIf="!product.inStock" class="out-of-stock">Out of Stock</span>
+      </div>
+      <mat-card-content>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle class="product-price">{{ product.price | currency:'INR':'symbol':'1.2-2':'en-IN' }}</mat-card-subtitle>
+        <div class="product-rating">
+          <mat-icon *ngFor="let star of [1,2,3,4,5]" 
+                   [color]="star <= product.rating ? 'accent' : ''">
+            {{ star <= product.rating ? 'star' : 'star_border' }}
+          </mat-icon>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" [routerLink]="['/product', product.id]">
+          <mat-icon>visibility</mat-icon> View Details
+        </button>
+        <button mat-button color="accent" (click)="addToCart(product)" [disabled]="!product.inStock">
+          <mat-icon>add_shopping_cart</mat-icon> Add to Cart
+        </button>
+        <button mat-icon-button color="warn" (click)="toggleWishlist($event, product)" class="wishlist-button">
+          <mat-icon>{{ isInWishlist(product.id) ? 'favorite' : 'favorite_border' }}</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

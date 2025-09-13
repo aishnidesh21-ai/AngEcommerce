@@ -1,0 +1,140 @@
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+.contact-header-card {
+  margin-bottom: 24px;
+  background: linear-gradient(rgba(217, 208, 226, 0.8), rgba(103, 58, 183, 0.8)),
+    url('https://th.bing.com/th/id/R.1a6ef800e4679e1f4d5f3db2ab031b38?rik=6SIAsEDzSjIvng&riu=http%3a%2f%2flocaladvertisingjournal.com%2fwp-content%2fuploads%2f2019%2f05%2fOpen-an-online-store-The-top-10-free-eCommerce-platforms.jpg&ehk=Wk7NeVvJo9kKLUiLUWStVMXXDKi9rDH4LXWsW3%2bngYY%3d&risl=&pid=ImgRaw&r=0') 
+    center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  border-radius: 12px;
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.contact-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-info-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.contact-info-item mat-icon {
+  margin-right: 16px;
+  color: #673ab7;
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+}
+
+.contact-info-item h3 {
+  margin: 0 0 8px 0;
+  color: #673ab7;
+  font-weight: bold;
+}
+
+.contact-info-item p {
+  margin: 0;
+  color: #616161;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+button[type="submit"] {
+  margin-top: 16px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background: #673ab7;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: #512da8;
+}
+
+.faq-section {
+  margin-bottom: 40px;
+}
+
+.faq-section h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #673ab7;
+  font-weight: bold;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 24px;
+}
+
+.faq-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.faq-card h3 {
+  color: #673ab7;
+  margin-top: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-title {
+    font-size: 2rem;
+  }
+}

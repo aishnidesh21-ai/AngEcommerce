@@ -1,0 +1,58 @@
+<div class="about-container">
+  <mat-card class="about-header-card">
+    <mat-card-content>
+      <h1 class="about-title">About {{ companyInfo.name }}</h1>
+      <p class="about-subtitle">Founded in {{ companyInfo.founded }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <section class="about-section">
+    <mat-card>
+      <mat-card-content>
+        <h2>Our Story</h2>
+        <p>Welcome to {{ companyInfo.name }}, your one-stop destination for all your shopping needs. Since our founding in {{ companyInfo.founded }}, we've been dedicated to providing exceptional products and service to our customers.</p>
+        
+        <div class="mission-vision">
+          <div class="mission">
+            <h3>Our Mission</h3>
+            <p>{{ companyInfo.mission }}</p>
+          </div>
+          <div class="vision">
+            <h3>Our Vision</h3>
+            <p>{{ companyInfo.vision }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <section class="values-section">
+    <h2>Our Values</h2>
+    <div class="values-grid">
+      <mat-card *ngFor="let value of values" class="value-card">
+        <mat-card-content>
+          <mat-icon class="value-icon">{{ value.icon }}</mat-icon>
+          <h3>{{ value.title }}</h3>
+          <p>{{ value.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <mat-card *ngFor="let member of teamMembers" class="team-card">
+        <mat-card-content>
+          <div class="team-avatar">
+            <mat-icon>person</mat-icon>
+          </div>
+          <h3>{{ member.name }}</h3>
+          <h4>{{ member.position }}</h4>
+          <mat-divider></mat-divider>
+          <p>{{ member.bio }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,100 @@
+<div class="app-container">
+  <!-- Header -->
+  <mat-toolbar color="primary" class="app-header">
+    <div class="header-content">
+     <!-- Logo -->
+<div class="logo" routerLink="/">
+    <img 
+      src="https://png.pngtree.com/png-vector/20240122/ourmid/pngtree-shopping-online-symbol-color-png-image_11456536.png" 
+      alt="ShopEase Logo" 
+      class="logo-img"
+    />
+    <h1>
+    ShopEase
+  </h1>
+</div>
+
+      <!-- Navigation -->
+      <nav class="main-nav">
+        <button mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon>home</mat-icon> Home
+        </button>
+        <button mat-button routerLink="/products" routerLinkActive="active-link">
+          <mat-icon>storefront</mat-icon> Products
+        </button>
+        <button mat-button routerLink="/about" routerLinkActive="active-link">
+          <mat-icon>info</mat-icon> About
+        </button>
+        <button mat-button routerLink="/contact" routerLinkActive="active-link">
+          <mat-icon>call</mat-icon> Contact
+        </button>
+      </nav>
+
+      <!-- Wishlist & Cart -->
+      <div class="user-actions">
+        <button mat-icon-button (click)="navigateToWishlist()" class="wishlist-button">
+          <mat-icon 
+            [matBadge]="wishlistItemCount" 
+            [matBadgeHidden]="wishlistItemCount === 0" 
+            matBadgeColor="accent">favorite
+          </mat-icon>
+        </button>
+        <button mat-icon-button (click)="navigateToCart()" class="cart-button">
+          <mat-icon 
+            [matBadge]="cartItemCount" 
+            [matBadgeHidden]="cartItemCount === 0" 
+            matBadgeColor="accent">shopping_cart
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <!-- Main Content -->
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <h2> <img 
+      src="https://png.pngtree.com/png-vector/20240122/ourmid/pngtree-shopping-online-symbol-color-png-image_11456536.png" 
+      alt="ShopEase Logo" 
+      class="logo-img"
+    /> ShopEase</h2>
+        <p>Your one-stop shop for fashion & lifestyle.</p>
+       <div class="social-icons">
+  <a href="https://www.facebook.com" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://x.com/i/flow/login" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+  <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+  <a href="mailto:info@shopease.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+</div>
+
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/products">Products</a></li>
+          <li><a routerLink="/cart">Cart</a></li>
+          <li><a routerLink="/about">About</a></li>
+          <li><a routerLink="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p><mat-icon>email</mat-icon> info@shopease.com</p>
+        <p><mat-icon>call</mat-icon> +1 (123) 456-7890</p>
+        <p><mat-icon>location_on</mat-icon> Pune ,Maharashtra</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+  <p>&copy; {{ currentYear }} ShopEase. All rights reserved.</p>
+</div>
+  </footer>
+</div>

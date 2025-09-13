@@ -1,0 +1,66 @@
+<div class="wishlist-container">
+  <mat-card class="wishlist-header-card">
+    <mat-card-content>
+      <h1 class="wishlist-header-title">My Wishlist💞</h1>
+      <button *ngIf="wishlistItems.length > 0" mat-button color="warn" (click)="clearWishlist()">
+        <mat-icon>delete_sweep</mat-icon> Clear Wishlist
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <mat-card>
+      <mat-card-content>
+        <mat-icon color="warn">error</mat-icon>
+        <p>Error loading wishlist. Please try again later.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!loading && !error && wishlistItems.length === 0" class="empty-wishlist">
+    <mat-card>
+      <mat-card-content>
+        <mat-icon>favorite_border</mat-icon>
+        <p>Your wishlist is empty.</p>
+        <button mat-raised-button color="primary" routerLink="/products">
+          Continue Shopping
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <div *ngIf="!loading && !error && wishlistItems.length > 0" class="wishlist-grid">
+    <mat-card *ngFor="let item of wishlistItems" class="wishlist-card">
+      <div class="wishlist-image" *ngIf="item.product">
+        <img [src]="item.product.imageUrl" [alt]="item.product.name">
+        <div *ngIf="!item.product.inStock" class="out-of-stock">Out of Stock</div>
+      </div>
+      <mat-card-content *ngIf="item.product">
+        <mat-card-title>{{ item.product.name }}</mat-card-title>
+        <mat-card-subtitle class="product-price">{{ item.product.price | currency:'INR':'symbol':'1.2-2':'en-IN' }}</mat-card-subtitle>
+        <div class="product-rating">
+          <mat-icon *ngFor="let star of [1,2,3,4,5]" 
+                   [color]="star <= item.product.rating ? 'accent' : ''">
+            {{ star <= item.product.rating ? 'star' : 'star_border' }}
+          </mat-icon>
+        </div>
+        <p class="date-added">Added on {{ item.dateAdded | date:'mediumDate' }}</p>
+      </mat-card-content>
+      <mat-card-actions *ngIf="item.product">
+        <button mat-button color="primary" (click)="viewProductDetails(item.product.id)">
+          <mat-icon>visibility</mat-icon> View Details
+        </button>
+        <button mat-button color="accent" (click)="addToCart(item.product)" [disabled]="!item.product.inStock">
+          <mat-icon>add_shopping_cart</mat-icon> Add to Cart
+        </button>
+        <button mat-icon-button color="warn" (click)="removeFromWishlist(item.productId)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
