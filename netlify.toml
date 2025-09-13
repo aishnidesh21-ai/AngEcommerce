@@ -1,6 +1,5 @@
 [build]
   command = "ng build --configuration production"
-  publish = "dist/ecommerce-app"
   publish = "dist/ecommerce-app/browser"
 
 [[redirects]]
