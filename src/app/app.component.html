@@ -2,20 +2,24 @@
   <!-- Header -->
   <mat-toolbar color="primary" class="app-header">
     <div class="header-content">
-     <!-- Logo -->
-<div class="logo" routerLink="/">
-    <img 
-      src="https://png.pngtree.com/png-vector/20240122/ourmid/pngtree-shopping-online-symbol-color-png-image_11456536.png" 
-      alt="ShopEase Logo" 
-      class="logo-img"
-    />
-    <h1>
-    ShopEase
-  </h1>
-</div>
+      
+      <!-- Hamburger (Mobile Only) -->
+      <button mat-icon-button class="menu-btn" (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
 
-      <!-- Navigation -->
-      <nav class="main-nav">
+      <!-- Logo -->
+      <div class="logo" routerLink="/">
+        <img 
+          src="https://png.pngtree.com/png-vector/20240122/ourmid/pngtree-shopping-online-symbol-color-png-image_11456536.png" 
+          alt="ShopEase Logo" 
+          class="logo-img"
+        />
+        <h1>ShopEase</h1>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav desktop-nav">
         <button mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
           <mat-icon>home</mat-icon> Home
         </button>
@@ -50,51 +54,75 @@
     </div>
   </mat-toolbar>
 
-  <!-- Main Content -->
-  <main class="app-content">
-    <router-outlet></router-outlet>
-  </main>
+  <!-- 📱 Mobile Sidenav -->
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="mobile-sidenav" mode="over" position="start">
+      <nav class="mobile-nav">
+        <button mat-button routerLink="/" (click)="sidenav.close()" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon>home</mat-icon> Home
+        </button>
+        <button mat-button routerLink="/products" (click)="sidenav.close()" routerLinkActive="active-link">
+          <mat-icon>storefront</mat-icon> Products
+        </button>
+        <button mat-button routerLink="/about" (click)="sidenav.close()" routerLinkActive="active-link">
+          <mat-icon>info</mat-icon> About
+        </button>
+        <button mat-button routerLink="/contact" (click)="sidenav.close()" routerLinkActive="active-link">
+          <mat-icon>call</mat-icon> Contact
+        </button>
+      </nav>
+    </mat-sidenav>
 
-  <!-- Footer -->
-  <footer class="app-footer">
-    <div class="footer-top">
-      <div class="footer-logo">
-        <h2> <img 
-      src="https://png.pngtree.com/png-vector/20240122/ourmid/pngtree-shopping-online-symbol-color-png-image_11456536.png" 
-      alt="ShopEase Logo" 
-      class="logo-img"
-    /> ShopEase</h2>
-        <p>Your one-stop shop for fashion & lifestyle.</p>
-       <div class="social-icons">
-  <a href="https://www.facebook.com" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-  <a href="https://x.com/i/flow/login" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-  <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-  <a href="mailto:info@shopease.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-</div>
+    <mat-sidenav-content>
+      <!-- Main Content -->
+      <main class="app-content">
+        <router-outlet></router-outlet>
+      </main>
 
-      </div>
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div class="footer-top">
+          <div class="footer-logo">
+            <h2>
+              <img 
+                src="https://png.pngtree.com/png-vector/20240122/ourmid/pngtree-shopping-online-symbol-color-png-image_11456536.png" 
+                alt="ShopEase Logo" 
+                class="logo-img"
+              /> 
+              ShopEase
+            </h2>
+            <p>Your one-stop shop for fashion & lifestyle.</p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://x.com/i/flow/login" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="mailto:info@shopease.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
 
-      <div class="footer-links">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a routerLink="/">Home</a></li>
-          <li><a routerLink="/products">Products</a></li>
-          <li><a routerLink="/cart">Cart</a></li>
-          <li><a routerLink="/about">About</a></li>
-          <li><a routerLink="/contact">Contact</a></li>
-        </ul>
-      </div>
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a routerLink="/">Home</a></li>
+              <li><a routerLink="/products">Products</a></li>
+              <li><a routerLink="/cart">Cart</a></li>
+              <li><a routerLink="/about">About</a></li>
+              <li><a routerLink="/contact">Contact</a></li>
+            </ul>
+          </div>
 
-      <div class="footer-contact">
-        <h3>Contact Us</h3>
-        <p><mat-icon>email</mat-icon> info@shopease.com</p>
-        <p><mat-icon>call</mat-icon> +1 (123) 456-7890</p>
-        <p><mat-icon>location_on</mat-icon> Pune ,Maharashtra</p>
-      </div>
-    </div>
+          <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p><mat-icon>email</mat-icon> info@shopease.com</p>
+            <p><mat-icon>call</mat-icon> +1 (123) 456-7890</p>
+            <p><mat-icon>location_on</mat-icon> Pune ,Maharashtra</p>
+          </div>
+        </div>
 
-    <div class="footer-bottom">
-  <p>&copy; {{ currentYear }} ShopEase. All rights reserved.</p>
-</div>
-  </footer>
+        <div class="footer-bottom">
+          <p>&copy; {{ currentYear }} ShopEase. All rights reserved.</p>
+        </div>
+      </footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
