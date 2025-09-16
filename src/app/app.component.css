@@ -1,6 +1,7 @@
 /* HEADER */
 .app-header {
-  position: sticky;
+  background: linear-gradient(to right, #5575bc, #3b3bc5, #162ada);
+  position: static;
   top: 0;
   z-index: 1000;
   height: 80px;
@@ -56,6 +57,11 @@
   display: none;
   color: white;
 }
+mat-sidenav {
+  background-color: #f6eded !important; /* Material Blue */
+  color: white !important; /* text/icons white */
+}
+
 
 @media (max-width: 992px) {
   .hamburger-btn {
@@ -68,8 +74,14 @@
 }
 
 /* FOOTER */
-.app-footer {
+/* .app-footer {
   background: #0d1b8c;
+  color: #fff;
+  padding: 40px 20px 20px;
+  margin-top: 40px;
+} */
+ .app-footer {
+  background: linear-gradient(to right, #5575bc, #3b3bc5, #162ada);
   color: #fff;
   padding: 40px 20px 20px;
   margin-top: 40px;
