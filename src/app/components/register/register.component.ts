@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { AuthService } from '../../services/auth.service';
 
 // Custom validator for password confirmation
@@ -35,7 +36,8 @@ function passwordMatchValidator(control: AbstractControl): {[key: string]: any} 
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   template: `
     <div class="register-container">
@@ -96,6 +98,18 @@ function passwordMatchValidator(control: AbstractControl): {[key: string]: any} 
               </mat-error>
               <mat-error *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched">
                 Passwords do not match
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Select Role</mat-label>
+              <mat-select formControlName="role">
+                <mat-option value="user">User</mat-option>
+                <mat-option value="admin">Admin</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>admin_panel_settings</mat-icon>
+              <mat-error *ngIf="registerForm.get('role')?.hasError('required')">
+                Role selection is required
               </mat-error>
             </mat-form-field>
 
@@ -214,7 +228,8 @@ export class RegisterComponent {
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+      role: ['user', [Validators.required]]
     }, { validators: passwordMatchValidator });
   }
 
@@ -224,7 +239,8 @@ export class RegisterComponent {
       const userData = {
         name: this.registerForm.value.name,
         email: this.registerForm.value.email,
-        password: this.registerForm.value.password
+        password: this.registerForm.value.password,
+        role: this.registerForm.value.role
       };
 
       this.authService.register(userData).subscribe({

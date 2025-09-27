@@ -6,6 +6,7 @@ export interface Product {
   imageUrl: string;
   category: string;
   subcategory?: string;
+  brand?: string;        // 👈 added brand
   inStock: boolean;
   rating: number;
   reviews?: Review[];

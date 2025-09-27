@@ -178,45 +178,35 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void {
+  onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      const credentials = this.loginForm.value;
-
-      this.authService.login(credentials).subscribe({
+      
+      // Ensure we have valid values before sending
+      const loginData = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      };
+      
+      this.authService.login(loginData).subscribe({
         next: (response) => {
           this.isLoading = false;
-          if (response.success) {
-            this.snackBar.open('Login successful!', 'Close', {
-              duration: 3000,
-              panelClass: ['success-snackbar']
-            });
-            
-            // Redirect based on user role
-            const user = this.authService.getCurrentUser();
-            if (user?.role === 'admin') {
-              this.router.navigate(['/admin']);
-            } else {
-              this.router.navigate(['/']);
-            }
+          this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+          
+          // Redirect based on user role
+          const user = this.authService.getCurrentUser();
+          console.log('Current user:', user);
+          if (user && user.role === 'admin') {
+            this.router.navigate(['/admin/dashboard']);
           } else {
-            this.snackBar.open(response.message || 'Login failed', 'Close', {
-              duration: 5000,
-              panelClass: ['error-snackbar']
-            });
+            this.router.navigate(['/']);
           }
         },
         error: (error) => {
           this.isLoading = false;
           console.error('Login error:', error);
-          this.snackBar.open(
-            error.error?.message || 'Login failed. Please try again.',
-            'Close',
-            {
-              duration: 5000,
-              panelClass: ['error-snackbar']
-            }
-          );
+          const errorMessage = error.error?.message || 'Server error during login. Please try again.';
+          this.snackBar.open(errorMessage, 'Close', { duration: 5000 });
         }
       });
     }

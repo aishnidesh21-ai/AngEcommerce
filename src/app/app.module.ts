@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Angular Material Imports
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +19,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 // Services
 import { ProductService } from './services/product.service';
 import { CartService } from './services/cart.service';
+import { AuthService } from './services/auth.service';
+import { CategoryService } from './services/category.service';
+
+// Guards
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+
+// Interceptors
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 // 👇 Locale imports
 import { registerLocaleData } from '@angular/common';
@@ -34,6 +44,7 @@ registerLocaleData(localeIn, 'en-IN');
     ReactiveFormsModule,
     RouterModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     // Angular Material
     MatButtonModule,
     MatCardModule,
@@ -48,6 +59,11 @@ registerLocaleData(localeIn, 'en-IN');
   providers: [
     ProductService,
     CartService,
+    AuthService,
+    CategoryService,
+    AuthGuard,
+    AdminGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'en-IN' }   // 👈 Default locale INR
   ],
   bootstrap: []

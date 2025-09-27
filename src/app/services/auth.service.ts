@@ -21,6 +21,7 @@ export interface RegisterRequest {
   name: string;
   email: string;
   password: string;
+  role: string;
 }
 
 export interface AuthResponse {
@@ -80,7 +81,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap(response => {
-          if (response.success && response.token && response.user) {
+          if (response.token && response.user) {
             this.setAuthData(response.token, response.user);
           }
         })

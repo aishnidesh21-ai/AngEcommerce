@@ -95,8 +95,47 @@ mat-card-actions {
   }
 }
 
+/* Filter Styles */
+.filter-card {
+  margin-bottom: 24px;
+  background-color: #f9f9f9;
+}
+
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.filter-container mat-form-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.price-filter {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.price-slider {
+  width: 100%;
+  margin-top: 8px;
+}
+
 @media (max-width: 480px) {
   .product-grid {
     grid-template-columns: 1fr;
+  
+  .filter-container {
+    flex-direction: column;
+  }
+  
+  .filter-container mat-form-field,
+  .price-filter {
+    width: 100%;
+  }
   }
 }

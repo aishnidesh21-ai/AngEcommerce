@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-product-list',
@@ -32,7 +34,9 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    MatSliderModule
   ],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
@@ -45,6 +49,14 @@ export class ProductListComponent implements OnInit {
   categoryFilter: string | null = null;
   subcategoryFilter: string | null = null;
   searchTerm = '';
+  
+  // Filter options
+  selectedCategory = '';
+  selectedBrand = '';
+  minPrice = 0;
+  maxPrice = 10000;
+  categories: string[] = ['electronics', 'clothing', 'books', 'home', 'beauty', 'sports'];
+  brands: string[] = ['apple', 'samsung', 'nike', 'adidas', 'sony', 'hp', 'dell', 'lenovo'];
 
   constructor(
     private productService: ProductService,
@@ -94,14 +106,42 @@ export class ProductListComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.filteredProducts = this.products.filter(product =>
-      product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      product.description.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    this.filteredProducts = this.products.filter(product => {
+      // Search term filter
+      const matchesSearch = this.searchTerm === '' || 
+        product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(this.searchTerm.toLowerCase());
+      
+      // Category filter
+      const matchesCategory = this.selectedCategory === '' || 
+        product.category.toLowerCase() === this.selectedCategory.toLowerCase();
+      
+      // Brand filter
+      const matchesBrand = this.selectedBrand === '' || 
+        (product.brand || '').toLowerCase() === this.selectedBrand.toLowerCase()
+
+      
+      // Price filter
+      const matchesPrice = product.price >= this.minPrice && product.price <= this.maxPrice;
+      
+      return matchesSearch && matchesCategory && matchesBrand && matchesPrice;
+    });
   }
 
   onSearch(): void {
     this.applyFilters();
+  }
+  
+  resetFilters(): void {
+    this.selectedCategory = '';
+    this.selectedBrand = '';
+    this.minPrice = 0;
+    this.maxPrice = 10000;
+    this.searchTerm = '';
+    this.applyFilters();
+    this.snackBar.open('Filters have been reset', 'Close', {
+      duration: 3000
+    });
   }
 
   addToCart(product: Product): void {

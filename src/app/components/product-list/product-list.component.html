@@ -29,6 +29,49 @@
     </mat-card-content>
   </mat-card>
 
+  <!-- Filter Options -->
+  <mat-card class="filter-card">
+    <mat-card-content>
+      <div class="filter-container">
+        <!-- Category Filter -->
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select [(ngModel)]="selectedCategory" (selectionChange)="applyFilters()">
+            <mat-option [value]="''">All Categories</mat-option>
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{category | titlecase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Brand Filter -->
+        <mat-form-field appearance="outline">
+          <mat-label>Brand</mat-label>
+          <mat-select [(ngModel)]="selectedBrand" (selectionChange)="applyFilters()">
+            <mat-option [value]="''">All Brands</mat-option>
+            <mat-option *ngFor="let brand of brands" [value]="brand">
+              {{brand | titlecase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Price Range Filter -->
+        <div class="price-filter">
+          <span>Price Range: ₹{{minPrice}} - ₹{{maxPrice}}</span>
+          <mat-slider min="0" max="10000" step="100" class="price-slider">
+            <input matSliderStartThumb [(ngModel)]="minPrice" (valueChange)="applyFilters()">
+            <input matSliderEndThumb [(ngModel)]="maxPrice" (valueChange)="applyFilters()">
+          </mat-slider>
+        </div>
+
+        <!-- Reset Filters Button -->
+        <button mat-raised-button color="warn" (click)="resetFilters()">
+          <mat-icon>refresh</mat-icon> Reset Filters
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
   <div *ngIf="loading" class="loading-container">
     <mat-spinner diameter="40"></mat-spinner>
   </div>
