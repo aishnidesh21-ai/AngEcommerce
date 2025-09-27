@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
     this.productService.getAllProducts().subscribe({
       next: (products) => {
         this.featuredProducts = products
-          .sort((a, b) => b.rating - a.rating)
+          .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
           .slice(0, 6);
         this.loading = false;
       },

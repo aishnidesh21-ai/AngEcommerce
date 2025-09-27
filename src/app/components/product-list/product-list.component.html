@@ -105,8 +105,8 @@
         <mat-card-subtitle class="product-price">{{ product.price | currency:'INR':'symbol':'1.2-2':'en-IN' }}</mat-card-subtitle>
         <div class="product-rating">
           <mat-icon *ngFor="let star of [1,2,3,4,5]" 
-                   [color]="star <= product.rating ? 'accent' : ''">
-            {{ star <= product.rating ? 'star' : 'star_border' }}
+                     [color]="star <= (product?.rating ?? 0) ? 'accent' : ''">
+  {{ star <= (product?.rating ?? 0) ? 'star' : 'star_border' }}
           </mat-icon>
         </div>
       </mat-card-content>

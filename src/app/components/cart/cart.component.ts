@@ -90,13 +90,13 @@ export class CartComponent implements OnInit {
     });
   }
 
-  updateQuantity(productId: number, quantity: number): void {
+  updateQuantity(productId: string, quantity: number): void {
     if (quantity < 1) return;
     
     this.cartService.updateQuantity(productId, quantity);
   }
 
-  removeItem(productId: number): void {
+  removeItem(productId: string): void {
     this.cartService.removeFromCart(productId);
   }
 

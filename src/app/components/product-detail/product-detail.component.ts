@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';   // 👈 Import kiya
+import { CommonModule } from '@angular/common';    
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
@@ -15,9 +15,9 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
-  standalone: true,  // 👈 standalone project me zaroori hai
+  standalone: true,  
   imports: [
-    CommonModule,  // 👈 *ngIf / *ngFor ke liye add kiya
+    CommonModule,  
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -41,11 +41,11 @@ export class ProductDetailComponent implements OnInit {
     private cartService: CartService,
     private wishlistService: WishlistService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const productId = Number(params.get('id'));
+      const productId = params.get('id');   // ✅ keep as string
       if (productId) {
         this.loadProduct(productId);
       } else {
@@ -55,7 +55,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  loadProduct(id: number): void {
+  loadProduct(id: string): void {
     this.productService.getProductById(id).subscribe({
       next: (product) => {
         this.product = product;
@@ -72,7 +72,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
   
-  checkIfInWishlist(productId: number): void {
+  checkIfInWishlist(productId: string): void {
     this.isInWishlist = this.wishlistService.isInWishlist(productId);
   }
 
@@ -81,9 +81,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   decrementQuantity(): void {
-    if (this.quantity > 1) {
-      this.quantity--;
-    }
+    if (this.quantity > 1) this.quantity--;
   }
 
   addToCart(): void {
@@ -117,6 +115,23 @@ export class ProductDetailComponent implements OnInit {
     }
     
     this.isInWishlist = !this.isInWishlist;
+  }
+  
+  rateProduct(rating: number): void {
+    if (this.product?.id) {
+      this.productService.updateProductRating(this.product.id, rating).subscribe({
+        next: (updatedProduct) => {
+          if (updatedProduct) {
+            this.product!.rating = updatedProduct.rating;
+          }
+          this.snackBar.open(`You rated this product ${rating} stars!`, 'Close', { duration: 3000 });
+        },
+        error: (error) => {
+          console.error('Error updating rating:', error);
+          this.snackBar.open('Failed to update rating. Please try again.', 'Close', { duration: 3000 });
+        }
+      });
+    }
   }
 
   goBack(): void {

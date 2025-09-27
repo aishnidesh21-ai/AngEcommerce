@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Product } from '../models/product.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  private apiUrl = environment.apiUrl + '/products';
   private products: Product[] = [
     // Men's Clothing
     {
-      id: 1,
+      id:'1',
       name: 'Men\'s Casual Shirt',
       description: 'Comfortable cotton casual shirt for men',
       price: 2100,
@@ -21,7 +25,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 2,
+      id: '2',
       name: 'Women\'s Summer Dress',
       description: 'Lightweight summer dress for women',
       price: 2400,
@@ -33,7 +37,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 3,
+      id: '3',
       name: 'Men\'s Jeans',
       description: 'Classic blue jeans for men',
       price: 1800,
@@ -45,7 +49,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 4,
+      id: '4',
       name: 'Women\'s Top',
       description: 'Elegant Top for women',
       price: 1500,
@@ -57,7 +61,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 5,
+      id: '5',
       name: 'Men\'s Sneakers',
       description: 'Comfortable sneakers for men',
       price: 1900,
@@ -69,7 +73,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
      {
-      id: 6,
+      id: '6',
       name: 'Women\'s Maxi Dress',
       description: 'Maxi Dress for women',
       price: 1600,
@@ -81,7 +85,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 7,
+      id: '7',
       name: 'Women\'s Jeans',
       description: 'Stylish Jeans for women',
       price: 2150,
@@ -94,7 +98,7 @@ export class ProductService {
     }
     ,
     {
-      id: 8,
+      id: '8',
       name: 'Men\'s Jacket',
       description: 'stylish Jacket for men',
       price: 3400,
@@ -107,7 +111,7 @@ export class ProductService {
     }
     ,
     {
-      id: 9,
+      id: '9',
       name: 'Women\'s Saree',
       description: 'Party Wear Saree for women',
       price: 4500,
@@ -120,7 +124,7 @@ export class ProductService {
     }
     ,
     {
-      id: 10,
+      id: '10',
       name: 'Men\'s Blazer',
       description: 'stylish Blazer for men',
       price: 5600,
@@ -132,7 +136,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 11,
+      id: '11',
       name: 'Women\'s Handbag',
       description: 'Stylish handbag for women',
       price: 850,
@@ -144,7 +148,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 12,
+      id: '12',
       name: 'Men\'s Trouser',
       description: 'stylish Trouser for men',
       price: 1400,
@@ -157,7 +161,7 @@ export class ProductService {
     },
     // Kids Wear
     {
-      id: 13,
+      id: '13',
       name: 'Kids Casual T-shirt',
       description: 'Comfortable cotton t-shirt for kids',
       price: 850,
@@ -169,7 +173,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 14,
+      id: '14',
       name: 'Kids Jeans',
       description: 'Durable jeans for active kids',
       price: 1100,
@@ -181,7 +185,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 15,
+      id: '15',
       name: 'Kids Party Dress',
       description: 'Elegant party dress for kids',
       price: 2350,
@@ -194,7 +198,7 @@ export class ProductService {
     },
     // Beauty Products
     {
-      id: 16,
+      id: '16',
       name: 'Facial Cleanser',
       description: 'Gentle facial cleanser for all skin types',
       price: 350,
@@ -205,7 +209,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 17,
+      id: '17',
       name: 'Moisturizing Cream',
       description: 'Hydrating face cream for daily use',
       price: 560,
@@ -216,7 +220,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 18,
+      id: '18',
       name: 'Lipstick Set',
       description: 'Set of 5 matte lipsticks in different shades',
       price: 800,
@@ -228,7 +232,7 @@ export class ProductService {
     },
     // Accessories
     {
-      id: 19,
+      id: '19',
       name: 'Leather Wallet',
       description: 'Premium leather wallet with multiple card slots',
       price: 1000,
@@ -239,7 +243,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 20,
+      id: '20',
       name: 'Sunglasses',
       description: 'UV protection sunglasses with polarized lenses',
       price: 2100,
@@ -250,7 +254,7 @@ export class ProductService {
       brand: 'MadeInIndia' 
     },
     {
-      id: 21,
+      id: '21',
       name: 'Watch',
       description: 'Elegant wristwatch with leather strap',
       price: 4200,
@@ -262,13 +266,18 @@ export class ProductService {
     }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+  
+  // Add new method to update product rating
+  updateProductRating(productId: string, rating: number): Observable<Product> {
+    return this.http.patch<Product>(`${this.apiUrl}/${productId}/rating`, { rating });
+  }
 
   getAllProducts(): Observable<Product[]> {
     return of(this.products);
   }
 
-  getProductById(id: number): Observable<Product | undefined> {
+  getProductById(id: string): Observable<Product | undefined> {
     const product = this.products.find(p => p.id === id);
     return of(product);
   }

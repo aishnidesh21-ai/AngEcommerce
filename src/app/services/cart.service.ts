@@ -59,12 +59,12 @@ export class CartService {
     this.saveCart();
   }
 
-  removeFromCart(productId: number): void {
+  removeFromCart(productId: string): void {
     this.cartItems = this.cartItems.filter(item => item.productId !== productId);
     this.saveCart();
   }
 
-  updateQuantity(productId: number, quantity: number): void {
+  updateQuantity(productId: string, quantity: number): void {
     const item = this.cartItems.find(item => item.productId === productId);
     if (item) {
       item.quantity = quantity;

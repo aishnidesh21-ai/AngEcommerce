@@ -49,7 +49,7 @@ export class WishlistService {
     return this.wishlistItemCount$;
   }
 
-  addToWishlist(productId: number): void {
+  addToWishlist(productId: string): void {
     if (!this.isInWishlist(productId)) {
       const newItem: WishlistItem = {
         productId,
@@ -61,7 +61,7 @@ export class WishlistService {
     }
   }
 
-  removeFromWishlist(productId: number): void {
+  removeFromWishlist(productId: string): void {
     const index = this.wishlistItems.findIndex(item => item.productId === productId);
     if (index !== -1) {
       this.wishlistItems.splice(index, 1);
@@ -70,7 +70,7 @@ export class WishlistService {
     }
   }
 
-  isInWishlist(productId: number): boolean {
+  isInWishlist(productId: string): boolean {
     return this.wishlistItems.some(item => item.productId === productId);
   }
 

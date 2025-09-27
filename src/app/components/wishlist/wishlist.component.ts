@@ -82,7 +82,7 @@ export class WishlistComponent implements OnInit {
     });
   }
 
-  removeFromWishlist(productId: number): void {
+  removeFromWishlist(productId: string): void {
     this.wishlistService.removeFromWishlist(productId);
     this.wishlistItems = this.wishlistItems.filter(item => item.productId !== productId);
   }
@@ -91,9 +91,9 @@ export class WishlistComponent implements OnInit {
     this.cartService.addToCart(product, 1);
   }
 
-  viewProductDetails(productId: number): void {
-    this.router.navigate(['/product', productId]);
-  }
+  viewProductDetails(productId: string): void {
+  this.router.navigate(['/product', productId]);
+}
 
   clearWishlist(): void {
     this.wishlistService.clearWishlist();

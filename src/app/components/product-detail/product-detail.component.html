@@ -31,9 +31,10 @@
           <div class="product-price">{{ product.price | currency }}</div>
           <div class="product-rating">
             <mat-icon *ngFor="let star of [1,2,3,4,5]" 
-                     [color]="star <= product.rating ? 'accent' : ''">
-              {{ star <= product.rating ? 'star' : 'star_border' }}
+                       [color]="star <= (product.rating ?? 0) ? 'accent' : ''">
+  {{ star <= (product.rating ?? 0) ? 'star' : 'star_border' }}
             </mat-icon>
+            <span class="rate-text">(Click to rate)</span>
           </div>
           <div class="product-availability" [class.out-of-stock]="!product.inStock">
             <mat-icon [color]="product.inStock ? 'primary' : 'warn'">

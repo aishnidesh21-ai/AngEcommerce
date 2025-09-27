@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: string;               // use string to match MongoDB _id
   name: string;
   description: string;
   price: number;
@@ -7,17 +7,20 @@ export interface Product {
   category: string;
   subcategory?: string;
   inStock: boolean;
-  rating: number;
+  stock?: number;           // added to track stock quantity
+  rating?: number;          // optional because new products may not have ratings
+  ratingCount?: number;     // optional to calculate average rating
   reviews?: Review[];
-  brand?: string;        // 👈 added brand
-  
+  brand?: string;
+  createdAt?: string;       // added for sorting by date
+  updatedAt?: string;       // optional
 }
 
 export interface Review {
-  id: number;
-  userId: number;
+  id: string;               // use string to match MongoDB _id
+  userId: string;           // user id as string
   userName: string;
   rating: number;
   comment: string;
-  date: Date;
+  date: string | Date;      // store as ISO string or Date
 }

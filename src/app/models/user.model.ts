@@ -15,7 +15,7 @@ export interface Address {
 }
 
 export interface CartItem {
-  productId: number;
+  productId: string;
   quantity: number;
   price: number;
 }

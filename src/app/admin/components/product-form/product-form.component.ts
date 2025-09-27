@@ -100,6 +100,14 @@ import { ProductApiService } from '../../../services/product-api.service';
             </mat-error>
           </mat-form-field>
 
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Initial Rating (1-5)</mat-label>
+            <input matInput type="number" formControlName="rating" placeholder="0" min="0" max="5" step="0.1">
+            <mat-error *ngIf="productForm.get('rating')?.hasError('min') || productForm.get('rating')?.hasError('max')">
+              Rating must be between 0 and 5
+            </mat-error>
+          </mat-form-field>
+
           <div class="image-preview" *ngIf="productForm.get('image')?.value">
             <img [src]="productForm.get('image')?.value" alt="Product preview" 
                  (error)="onImageError()" class="preview-image">
@@ -187,6 +195,7 @@ export class ProductFormComponent implements OnInit {
       stock: ['', [Validators.required, Validators.min(0)]],
       category: ['', [Validators.required]],
       image: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
+      rating: [0, [Validators.min(0), Validators.max(5)]],
       brand: ['MadeInIndia']   // ✅ default value
     });
   }

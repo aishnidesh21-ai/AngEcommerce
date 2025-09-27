@@ -106,26 +106,42 @@ export class ProductListComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.filteredProducts = this.products.filter(product => {
-      // Search term filter
-      const matchesSearch = this.searchTerm === '' || 
-        product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        product.description.toLowerCase().includes(this.searchTerm.toLowerCase());
-      
-      // Category filter
-      const matchesCategory = this.selectedCategory === '' || 
-        product.category.toLowerCase() === this.selectedCategory.toLowerCase();
-      
-      // Brand filter
-      const matchesBrand = this.selectedBrand === '' || 
-        (product.brand || '').toLowerCase() === this.selectedBrand.toLowerCase()
-
-      
-      // Price filter
-      const matchesPrice = product.price >= this.minPrice && product.price <= this.maxPrice;
-      
-      return matchesSearch && matchesCategory && matchesBrand && matchesPrice;
+    let filteredProducts = [...this.products];
+    
+    // Apply search filter
+    if (this.searchTerm) {
+      filteredProducts = filteredProducts.filter(product => 
+        product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+    
+    // Apply category filter
+    if (this.selectedCategory) {
+      filteredProducts = filteredProducts.filter(product => 
+        product.category === this.selectedCategory
+      );
+    }
+    
+    // Apply brand filter
+    if (this.selectedBrand) {
+      filteredProducts = filteredProducts.filter(product => 
+        product.brand === this.selectedBrand
+      );
+    }
+    
+    // Apply price filter
+    filteredProducts = filteredProducts.filter(product => 
+      product.price >= this.minPrice && product.price <= this.maxPrice
+    );
+    
+    // Sort by newest first (based on createdAt date)
+    filteredProducts.sort((a, b) => {
+      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      return dateB - dateA; // Descending order (newest first)
     });
+    
+    this.filteredProducts = filteredProducts;
   }
 
   onSearch(): void {
@@ -153,7 +169,7 @@ export class ProductListComponent implements OnInit {
     });
   }
   
-  isInWishlist(productId: number): boolean {
+  isInWishlist(productId: string): boolean {
     return this.wishlistService.isInWishlist(productId);
   }
   
