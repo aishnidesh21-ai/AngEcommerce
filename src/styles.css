@@ -97,3 +97,9 @@ header, footer {
   padding: 20px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.1);
 }
+/* Hide browser native password toggle icons */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
