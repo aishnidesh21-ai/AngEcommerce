@@ -183,10 +183,15 @@ export class LoginComponent {
       this.isLoading = true;
       
       // Ensure we have valid values before sending
+      const email = this.loginForm.get('email')?.value || '';
+      const password = this.loginForm.get('password')?.value || '';
+      
       const loginData = {
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password
+        email: email,
+        password: password
       };
+      
+      console.log('Sending login data:', { email, passwordLength: password.length });
       
       this.authService.login(loginData).subscribe({
         next: (response) => {
@@ -196,11 +201,17 @@ export class LoginComponent {
           // Redirect based on user role
           const user = this.authService.getCurrentUser();
           console.log('Current user:', user);
-          if (user && user.role === 'admin') {
-            this.router.navigate(['/admin/dashboard']);
-          } else {
-            this.router.navigate(['/']);
-          }
+          
+          // Force a small delay to ensure user data is properly set
+          setTimeout(() => {
+            if (user && user.role === 'admin') {
+              console.log('Redirecting to admin dashboard');
+              this.router.navigate(['/admin/dashboard']);
+            } else {
+              console.log('Redirecting to home page');
+              this.router.navigate(['/']);
+            }
+          }, 100);
         },
         error: (error) => {
           this.isLoading = false;

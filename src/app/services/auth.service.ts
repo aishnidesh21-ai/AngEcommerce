@@ -78,7 +78,13 @@ export class AuthService {
   }
 
   login(credentials: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
+    // Ensure password is a string and not undefined
+    const sanitizedLoginData = {
+      email: credentials.email,
+      password: credentials.password || ''
+    };
+    
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, sanitizedLoginData)
       .pipe(
         tap(response => {
           if (response.token && response.user) {
