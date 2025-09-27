@@ -17,7 +17,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'men',
       inStock: true,
-      rating: 4.5
+      rating: 4.5,
+      brand: 'MadeInIndia' 
     },
     {
       id: 2,
@@ -28,7 +29,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'women',
       inStock: true,
-      rating: 4.8
+      rating: 4.8,
+      brand: 'MadeInIndia' 
     },
     {
       id: 3,
@@ -39,7 +41,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'men',
       inStock: true,
-      rating: 4.9
+      rating: 4.9,
+      brand: 'MadeInIndia' 
     },
     {
       id: 4,
@@ -50,7 +53,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'women',
       inStock: true,
-      rating: 4.6
+      rating: 4.6,
+      brand: 'MadeInIndia' 
     },
     {
       id: 5,
@@ -61,7 +65,8 @@ export class ProductService {
        category: 'clothing',
       subcategory: 'men',
       inStock: false,
-      rating: 4.7
+      rating: 4.7,
+      brand: 'MadeInIndia' 
     },
      {
       id: 6,
@@ -72,7 +77,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'women',
       inStock: true,
-      rating: 4.9
+      rating: 4.9,
+      brand: 'MadeInIndia' 
     },
     {
       id: 7,
@@ -83,7 +89,8 @@ export class ProductService {
        category: 'clothing',
       subcategory: 'women',
       inStock: true,
-      rating: 4.9
+      rating: 4.9,
+      brand: 'MadeInIndia' 
     }
     ,
     {
@@ -95,7 +102,8 @@ export class ProductService {
        category: 'clothing',
       subcategory: 'men',
       inStock: false,
-      rating: 4.7
+      rating: 4.7,
+      brand: 'MadeInIndia' 
     }
     ,
     {
@@ -107,7 +115,8 @@ export class ProductService {
        category: 'clothing',
       subcategory: 'women',
       inStock: true,
-      rating: 4.9
+      rating: 4.9,
+      brand: 'MadeInIndia' 
     }
     ,
     {
@@ -119,7 +128,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'men',
       inStock: false,
-      rating: 4.7
+      rating: 4.7,
+      brand: 'MadeInIndia' 
     },
     {
       id: 11,
@@ -130,7 +140,8 @@ export class ProductService {
        category: 'clothing',
       subcategory: 'women',
       inStock: true,
-      rating: 4.6
+      rating: 4.6,
+      brand: 'MadeInIndia' 
     },
     {
       id: 12,
@@ -141,7 +152,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'men',
       inStock: false,
-      rating: 4.9
+      rating: 4.9,
+      brand: 'MadeInIndia' 
     },
     // Kids Wear
     {
@@ -153,7 +165,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'kids',
       inStock: true,
-      rating: 4.6
+      rating: 4.6,
+      brand: 'MadeInIndia' 
     },
     {
       id: 14,
@@ -164,7 +177,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'kids',
       inStock: true,
-      rating: 4.8
+      rating: 4.8,
+      brand: 'MadeInIndia' 
     },
     {
       id: 15,
@@ -175,7 +189,8 @@ export class ProductService {
       category: 'clothing',
       subcategory: 'kids',
       inStock: true,
-      rating: 4.8
+      rating: 4.8,
+      brand: 'MadeInIndia' 
     },
     // Beauty Products
     {
@@ -186,7 +201,8 @@ export class ProductService {
       imageUrl: 'https://i5.walmartimages.com/asr/f06729fd-f7ca-4535-912f-f8a147f15101.d1b193b0cfa0379280a8d4ee80378cc3.jpeg',
       category: 'beauty',
       inStock: true,
-      rating: 4.7
+      rating: 4.7,
+      brand: 'MadeInIndia' 
     },
     {
       id: 17,
@@ -196,7 +212,8 @@ export class ProductService {
       imageUrl: 'https://target.scene7.com/is/image/Target/GUEST_56106994-d5ee-42f3-a199-dc922330ea00?wid=488&hei=488&fmt=pjpeg',
       category: 'beauty',
       inStock: true,
-      rating: 4.5
+      rating: 4.5,
+      brand: 'MadeInIndia' 
     },
     {
       id: 18,
@@ -206,7 +223,8 @@ export class ProductService {
       imageUrl: 'https://images-cdn.ubuy.co.in/633ff73ad40de3563b303b9e-6-colors-of-velvet-smooth-matte-lipstick.jpg',
       category: 'beauty',
       inStock: true,
-      rating: 4.6
+      rating: 4.6,
+      brand: 'MadeInIndia' 
     },
     // Accessories
     {
@@ -217,7 +235,8 @@ export class ProductService {
       imageUrl: 'https://i.etsystatic.com/15615725/r/il/a1f930/2289085880/il_fullxfull.2289085880_aqlo.jpg',
       category: 'accessories',
       inStock: true,
-      rating: 4.4
+      rating: 4.4,
+      brand: 'MadeInIndia' 
     },
     {
       id: 20,
@@ -227,7 +246,8 @@ export class ProductService {
       imageUrl: 'https://static.vecteezy.com/system/resources/previews/022/330/010/non_2x/sunglasses-on-a-tropical-beach-and-sea-summer-festive-background-generative-ai-free-photo.jpeg',
       category: 'accessories',
       inStock: true,
-      rating: 4.7
+      rating: 4.7,
+      brand: 'MadeInIndia' 
     },
     {
       id: 21,
@@ -237,7 +257,8 @@ export class ProductService {
       imageUrl: 'https://tse1.mm.bing.net/th/id/OIP.hlhC0L07E6Zfiek0L_kcAAHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
       category: 'accessories',
       inStock: true,
-      rating: 4.8
+      rating: 4.8,
+      brand: 'MadeInIndia'  
     }
   ];
 

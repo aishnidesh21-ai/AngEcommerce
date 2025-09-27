@@ -105,6 +105,15 @@ import { ProductApiService } from '../../../services/product-api.service';
                  (error)="onImageError()" class="preview-image">
           </div>
 
+          <!-- ✅ Brand field added -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Brand</mat-label>
+            <input matInput formControlName="brand" placeholder="Enter brand name">
+            <mat-error *ngIf="productForm.get('brand')?.hasError('required')">
+              Brand is required
+            </mat-error>
+          </mat-form-field>
+
           <div class="form-actions">
             <button mat-button type="button" (click)="goBack()">Cancel</button>
             <button mat-raised-button color="primary" type="submit" 
@@ -177,7 +186,8 @@ export class ProductFormComponent implements OnInit {
       price: ['', [Validators.required, Validators.min(0.01)]],
       stock: ['', [Validators.required, Validators.min(0)]],
       category: ['', [Validators.required]],
-      image: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]]
+      image: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
+      brand: ['MadeInIndia']   // ✅ default value
     });
   }
 
@@ -199,7 +209,8 @@ export class ProductFormComponent implements OnInit {
           price: product.price,
           stock: product.stock,
           category: product.category,
-          image: product.image
+          image: product.image,
+          
         });
       },
       error: (error) => {
@@ -211,28 +222,41 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.productForm.valid) {
-      this.isSubmitting = true;
-      const productData = this.productForm.value;
+  if (this.productForm.valid) {
+    this.isSubmitting = true;
 
-      const operation = this.isEditMode && this.productId
-        ? this.productService.updateProduct(this.productId, productData)
-        : this.productService.createProduct(productData);
+    // Get form value
+    const productData = { ...this.productForm.value };
 
-      operation.subscribe({
-        next: () => {
-          const message = this.isEditMode ? 'Product updated successfully' : 'Product added successfully';
-          this.snackBar.open(message, 'Close', { duration: 3000 });
-          this.router.navigate(['/admin/products']);
-        },
-        error: (error) => {
-          console.error('Error saving product:', error);
-          this.snackBar.open('Error saving product', 'Close', { duration: 3000 });
-          this.isSubmitting = false;
-        }
-      });
+    // Trim the image URL and provide fallback if empty
+    if (!productData.image || !productData.image.trim()) {
+      productData.image = 'https://via.placeholder.com/150';
+    } else {
+      productData.image = productData.image.trim();
     }
+    console.log('Submitting productData:', productData); // 🔥 check here
+
+    // Choose operation: create or update
+    const operation = this.isEditMode && this.productId
+      ? this.productService.updateProduct(this.productId, productData)
+      : this.productService.createProduct(productData);
+
+    // Subscribe
+    operation.subscribe({
+      next: () => {
+        const message = this.isEditMode ? 'Product updated successfully' : 'Product added successfully';
+        this.snackBar.open(message, 'Close', { duration: 3000 });
+        this.router.navigate(['/admin/products']);
+      },
+      error: (error) => {
+        console.error('Error saving product:', error);
+        this.snackBar.open('Error saving product', 'Close', { duration: 3000 });
+        this.isSubmitting = false;
+      }
+    });
   }
+}
+
 
   onImageError() {
     this.snackBar.open('Invalid image URL or image failed to load', 'Close', { duration: 3000 });
