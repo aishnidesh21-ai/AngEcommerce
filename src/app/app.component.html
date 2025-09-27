@@ -57,6 +57,34 @@
 
           <!-- Wishlist & Cart -->
           <div class="user-actions">
+            <!-- Authentication buttons -->
+            <ng-container *ngIf="!isLoggedIn">
+              <button mat-button routerLink="/login" class="auth-button">
+                <mat-icon>login</mat-icon> Login
+              </button>
+              <button mat-button routerLink="/register" class="auth-button">
+                <mat-icon>person_add</mat-icon> Register
+              </button>
+            </ng-container>
+            
+            <!-- User menu when logged in -->
+            <ng-container *ngIf="isLoggedIn">
+              <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
+                <mat-icon>account_circle</mat-icon>
+                {{ currentUser?.name || 'User' }}
+              </button>
+              <mat-menu #userMenu="matMenu">
+                <button mat-menu-item *ngIf="isAdmin" routerLink="/admin">
+                  <mat-icon>admin_panel_settings</mat-icon>
+                  <span>Admin Dashboard</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                  <mat-icon>logout</mat-icon>
+                  <span>Logout</span>
+                </button>
+              </mat-menu>
+            </ng-container>
+            
             <button mat-icon-button (click)="navigateToWishlist()" class="wishlist-button">
               <mat-icon
                 [matBadge]="wishlistItemCount"
