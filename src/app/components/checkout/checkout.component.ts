@@ -11,20 +11,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
+    CommonModule,
+    RouterModule,
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule
   ],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
@@ -34,7 +36,7 @@ export class CheckoutComponent implements OnInit {
   cartTotal = 0;
   isSubmitting = false;
   orderPlaced = false;
-  
+
   paymentMethods = [
     { id: 'credit', name: 'Credit Card' },
     { id: 'debit', name: 'Debit Card' },
@@ -45,7 +47,8 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.checkoutForm = this.formBuilder.group({
       personalInfo: this.formBuilder.group({
@@ -62,17 +65,34 @@ export class CheckoutComponent implements OnInit {
       }),
       paymentMethod: ['credit', [Validators.required]],
       cardInfo: this.formBuilder.group({
-        cardNumber: ['', [Validators.required]],
-        nameOnCard: ['', [Validators.required]],
-        expiryDate: ['', [Validators.required]],
-        cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(4)]]
+        cardNumber: [''],
+        nameOnCard: [''],
+        expiryDate: [''],
+        cvv: ['']
       })
     });
   }
 
   ngOnInit(): void {
-    this.cartService.getCartTotal().subscribe(total => {
-      this.cartTotal = total;
+    // Update cart total
+    this.cartService.getCartTotal().subscribe(total => this.cartTotal = total);
+
+    // Watch payment method changes
+    this.paymentMethod?.valueChanges.subscribe(method => {
+      if (method === 'credit' || method === 'debit') {
+        // Add validators
+        this.cardInfo?.get('cardNumber')?.setValidators([Validators.required]);
+        this.cardInfo?.get('nameOnCard')?.setValidators([Validators.required]);
+        this.cardInfo?.get('expiryDate')?.setValidators([Validators.required]);
+        this.cardInfo?.get('cvv')?.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(4)]);
+      } else {
+        // Clear validators for PayPal or COD
+        this.cardInfo?.get('cardNumber')?.clearValidators();
+        this.cardInfo?.get('nameOnCard')?.clearValidators();
+        this.cardInfo?.get('expiryDate')?.clearValidators();
+        this.cardInfo?.get('cvv')?.clearValidators();
+      }
+      this.cardInfo?.updateValueAndValidity();
     });
   }
 
@@ -83,7 +103,6 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit(): void {
     if (this.checkoutForm.invalid) {
-      // Mark all fields as touched to trigger validation messages
       this.markFormGroupTouched(this.checkoutForm);
       return;
     }
@@ -95,13 +114,19 @@ export class CheckoutComponent implements OnInit {
       this.orderPlaced = true;
       this.cartService.clearCart();
       this.isSubmitting = false;
+
+      // Show success snackbar
+      this.snackBar.open('✅ Order placed successfully!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
     }, 2000);
   }
 
   markFormGroupTouched(formGroup: FormGroup): void {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
-
       if ((control as FormGroup).controls) {
         this.markFormGroupTouched(control as FormGroup);
       }

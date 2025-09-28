@@ -171,11 +171,16 @@
           <mat-icon>arrow_back</mat-icon>
           Back to Cart
         </button>
-        <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">
-          <mat-icon>payment</mat-icon>
-          {{ isSubmitting ? 'Processing...' : 'Place Order' }}
-        </button>
-      </div>
+       <button 
+    mat-raised-button 
+    color="primary" 
+    type="button" 
+    (click)="onSubmit()" 
+    [disabled]="isSubmitting">
+    <mat-icon>payment</mat-icon>
+    {{ isSubmitting ? 'Processing...' : 'Place Order' }}
+  </button>
+</div>
     </form>
     
     <mat-card class="order-summary">

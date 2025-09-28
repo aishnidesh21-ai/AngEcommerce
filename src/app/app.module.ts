@@ -54,6 +54,7 @@ registerLocaleData(localeIn, 'en-IN');
     MatSelectModule,
     MatBadgeModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     MatSnackBarModule
   ],
   providers: [

@@ -56,7 +56,7 @@ export class ProductListComponent implements OnInit {
   minPrice = 0;
   maxPrice = 10000;
   categories: string[] = ['electronics', 'clothing', 'books', 'home', 'beauty', 'sports'];
-  brands: string[] = ['apple', 'samsung', 'nike', 'adidas', 'sony', 'hp', 'dell', 'lenovo'];
+  brands: string[] = ['Adidas', 'H&M', 'Zara', 'Levis', 'Raymond', 'Gucci', 'USB', 'Burberry', 'Foxtale', 'Dot&Key', 'Lakme', 'Rayban', 'Titan', 'Olay'];
 
   constructor(
     private productService: ProductService,

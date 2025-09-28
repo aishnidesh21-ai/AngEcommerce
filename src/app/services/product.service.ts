@@ -22,7 +22,7 @@ export class ProductService {
       subcategory: 'men',
       inStock: true,
       rating: 4.5,
-      brand: 'MadeInIndia' 
+      brand: 'H&M' 
     },
     {
       id: '2',
@@ -34,7 +34,7 @@ export class ProductService {
       subcategory: 'women',
       inStock: true,
       rating: 4.8,
-      brand: 'MadeInIndia' 
+      brand: 'Zara' 
     },
     {
       id: '3',
@@ -46,7 +46,7 @@ export class ProductService {
       subcategory: 'men',
       inStock: true,
       rating: 4.9,
-      brand: 'MadeInIndia' 
+      brand: 'Levis' 
     },
     {
       id: '4',
@@ -58,7 +58,7 @@ export class ProductService {
       subcategory: 'women',
       inStock: true,
       rating: 4.6,
-      brand: 'MadeInIndia' 
+      brand: 'Zara' 
     },
     {
       id: '5',
@@ -70,7 +70,7 @@ export class ProductService {
       subcategory: 'men',
       inStock: false,
       rating: 4.7,
-      brand: 'MadeInIndia' 
+      brand: 'Adidas' 
     },
      {
       id: '6',
@@ -94,7 +94,7 @@ export class ProductService {
       subcategory: 'women',
       inStock: true,
       rating: 4.9,
-      brand: 'MadeInIndia' 
+      brand: 'Levis' 
     }
     ,
     {
@@ -107,7 +107,7 @@ export class ProductService {
       subcategory: 'men',
       inStock: false,
       rating: 4.7,
-      brand: 'MadeInIndia' 
+      brand: 'H&M' 
     }
     ,
     {
@@ -133,7 +133,7 @@ export class ProductService {
       subcategory: 'men',
       inStock: false,
       rating: 4.7,
-      brand: 'MadeInIndia' 
+      brand: 'Raymond' 
     },
     {
       id: '11',
@@ -145,7 +145,7 @@ export class ProductService {
       subcategory: 'women',
       inStock: true,
       rating: 4.6,
-      brand: 'MadeInIndia' 
+      brand: 'Gucci' 
     },
     {
       id: '12',
@@ -157,7 +157,7 @@ export class ProductService {
       subcategory: 'men',
       inStock: false,
       rating: 4.9,
-      brand: 'MadeInIndia' 
+      brand: 'USB' 
     },
     // Kids Wear
     {
@@ -170,7 +170,7 @@ export class ProductService {
       subcategory: 'kids',
       inStock: true,
       rating: 4.6,
-      brand: 'MadeInIndia' 
+      brand: 'Adidas' 
     },
     {
       id: '14',
@@ -182,7 +182,7 @@ export class ProductService {
       subcategory: 'kids',
       inStock: true,
       rating: 4.8,
-      brand: 'MadeInIndia' 
+      brand: 'Burberry' 
     },
     {
       id: '15',
@@ -206,7 +206,7 @@ export class ProductService {
       category: 'beauty',
       inStock: true,
       rating: 4.7,
-      brand: 'MadeInIndia' 
+      brand: 'Foxtale' 
     },
     {
       id: '17',
@@ -217,7 +217,7 @@ export class ProductService {
       category: 'beauty',
       inStock: true,
       rating: 4.5,
-      brand: 'MadeInIndia' 
+      brand: 'Olay' 
     },
     {
       id: '18',
@@ -228,7 +228,7 @@ export class ProductService {
       category: 'beauty',
       inStock: true,
       rating: 4.6,
-      brand: 'MadeInIndia' 
+      brand: 'Lakme' 
     },
     // Accessories
     {
@@ -240,7 +240,7 @@ export class ProductService {
       category: 'accessories',
       inStock: true,
       rating: 4.4,
-      brand: 'MadeInIndia' 
+      brand: 'Gucci' 
     },
     {
       id: '20',
@@ -251,7 +251,7 @@ export class ProductService {
       category: 'accessories',
       inStock: true,
       rating: 4.7,
-      brand: 'MadeInIndia' 
+      brand: 'Rayban' 
     },
     {
       id: '21',
@@ -262,7 +262,7 @@ export class ProductService {
       category: 'accessories',
       inStock: true,
       rating: 4.8,
-      brand: 'MadeInIndia'  
+      brand: 'Titan'  
     }
   ];
 
