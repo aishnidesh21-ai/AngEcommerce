@@ -15,6 +15,7 @@ export interface Product {
   brand?: string;
   createdAt?: string;       // added for sorting by date
   updatedAt?: string;       // optional
+  image?: string; // add this line
 }
 
 export interface Review {
