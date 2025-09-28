@@ -82,6 +82,8 @@
   position: relative;
   height: 200px;
   overflow: hidden;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(239, 7, 7, 0.12);
 }
 
 .wishlist-image img {
@@ -121,6 +123,8 @@ mat-card-actions {
   margin-top: auto;
   display: flex;
   justify-content: space-between;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(195, 49, 49, 0.12);
 }
 
 /* Responsive Styles */

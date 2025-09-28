@@ -96,10 +96,13 @@ mat-sidenav {
   margin-top: 40px;
 } */
  .app-footer {
-  background: linear-gradient(to right, #5575bc, #3b3bc5, #162ada);
+  background: linear-gradient(to right, #467df3, #3b3bc5, #162ada);
   color: #fff;
   padding: 40px 20px 20px;
   margin-top: 40px;
+  
+  transform: translateY(-4px);
+  box-shadow: 0 -20px 20px rgba(72, 1, 250, 0.12); 
 }
 
 .footer-top {

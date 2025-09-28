@@ -58,7 +58,7 @@
 
 .cart-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 20px rgba(226, 7, 7, 0.12);
 }
 
 .item-image {
