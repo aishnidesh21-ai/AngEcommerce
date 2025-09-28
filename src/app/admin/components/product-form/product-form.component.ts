@@ -230,12 +230,17 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+ onSubmit() {
   if (this.productForm.valid) {
     this.isSubmitting = true;
 
-    // Get form value
-    const productData = { ...this.productForm.value };
+    // Get form value and convert numeric fields to numbers
+    const productData = { 
+      ...this.productForm.value,
+      price: +this.productForm.value.price,   // Convert price to number
+      stock: +this.productForm.value.stock,   // Convert stock to number
+      rating: +this.productForm.value.rating  // Convert rating to number
+    };
 
     // Trim the image URL and provide fallback if empty
     if (!productData.image || !productData.image.trim()) {
@@ -243,6 +248,7 @@ export class ProductFormComponent implements OnInit {
     } else {
       productData.image = productData.image.trim();
     }
+
     console.log('Submitting productData:', productData); // 🔥 check here
 
     // Choose operation: create or update
@@ -265,6 +271,7 @@ export class ProductFormComponent implements OnInit {
     });
   }
 }
+
 
 
   onImageError() {

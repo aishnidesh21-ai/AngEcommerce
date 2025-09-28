@@ -49,23 +49,28 @@ export class ProductService {
 
   // Merge backend + local products, avoiding duplicates
   getAllProducts(): Observable<Product[]> {
-    return forkJoin([
-      this.http.get<Product[]>(this.apiUrl).pipe(
-        catchError(err => {
-          console.error('Error fetching backend products, using empty array', err);
-          return of([]);
-        })
-      ),
-      of(this.localProducts)
-    ]).pipe(
-      map(([backendProducts, localProducts]) => {
-        const allProductsMap = new Map<string, Product>();
-        backendProducts.forEach(p => allProductsMap.set(p.id, p));
-        localProducts.forEach(p => { if (!allProductsMap.has(p.id)) allProductsMap.set(p.id, p); });
-        return Array.from(allProductsMap.values());
-      })
-    );
-  }
+  return forkJoin([
+    this.http.get<Product[]>(this.apiUrl).pipe(
+      catchError(err => {
+        console.error('Error fetching backend products, using empty array', err);
+        return of([]);
+      }),
+      map(backendProducts => 
+        backendProducts.map(p => ({ ...p, id: p.id ?? p._id })) // <-- normalize ID here
+      )
+    ),
+    of(this.localProducts)
+  ]).pipe(
+    map(([backendProducts, localProducts]) => {
+      const allProductsMap = new Map<string, Product>();
+      backendProducts.forEach(p => allProductsMap.set(p.id, p));
+      localProducts.forEach(p => { 
+        if (!allProductsMap.has(p.id)) allProductsMap.set(p.id, p); 
+      });
+      return Array.from(allProductsMap.values());
+    })
+  );
+}
 
   getProductById(id: string): Observable<Product | undefined> {
     return this.getAllProducts().pipe(

@@ -1,5 +1,6 @@
 export interface Product {
   id: string;               // use string to match MongoDB _id
+  _id?: string;        // optional, backend DB field
   name: string;
   description: string;
   price: number;
