@@ -64,6 +64,7 @@ mat-card-actions {
   background: #f9f9f9; /* optional - placeholder bg */
   border-radius: 8px; /* optional - rounded corners */
   overflow: hidden; /* ensures clean fit */
+  position: relative; /* required for out-of-stock label positioning */
 }
 
 .product-image img {
