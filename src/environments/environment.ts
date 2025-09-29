@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://angecombackend.onrender.com/api'
+  apiUrl: 'https://angecombackend.onrender.com'
 };
