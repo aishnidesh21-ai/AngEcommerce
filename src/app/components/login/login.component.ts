@@ -193,23 +193,33 @@ export class LoginComponent {
       
       console.log('Sending login data:', { email, passwordLength: password.length });
       
-      this.authService.login(this.loginForm.value).subscribe({
-  next: (res) => {
-    console.log('Login response:', res);
-    const user = this.authService.getCurrentUser(); // now it will be set
-    console.log('Current user after login:', user);
-
-    if (user?.role === 'admin') {
-      this.router.navigate(['/admin-dashboard']);
-    } else {
-      this.router.navigate(['/home']);
-    }
-  },
-  error: (err) => {
-    console.error('Login error:', err);
-  }
-});
-
+      this.authService.login(loginData).subscribe({
+        next: (response) => {
+          this.isLoading = false;
+          this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+          
+          // Redirect based on user role
+          const user = this.authService.getCurrentUser();
+          console.log('Current user:', user);
+          
+          // Force a small delay to ensure user data is properly set
+          setTimeout(() => {
+            if (user && user.role === 'admin') {
+              console.log('Redirecting to admin dashboard');
+              this.router.navigate(['/admin/dashboard']);
+            } else {
+              console.log('Redirecting to home page');
+              this.router.navigate(['/']);
+            }
+          }, 100);
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.error('Login error:', error);
+          const errorMessage = error.error?.message || 'Server error during login. Please try again.';
+          this.snackBar.open(errorMessage, 'Close', { duration: 5000 });
+        }
+      });
     }
   }
 }
