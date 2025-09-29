@@ -150,7 +150,7 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'role', 'status', 'actions'];
   isLoading = true;
   
-  private apiUrl = 'http://localhost:8082/api/users';
+  private apiUrl = 'productId: stringhttps://angecombackend.onrender.com/api/users';
 
   constructor(
     private http: HttpClient,

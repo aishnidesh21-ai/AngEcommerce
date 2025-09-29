@@ -171,7 +171,7 @@ export class OrderListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'customer', 'date', 'total', 'status', 'actions'];
   isLoading = true;
   
-  private apiUrl = 'http://localhost:8082/api/orders';
+  private apiUrl = 'productId: stringhttps://angecombackend.onrender.com/api/orders';
 
   constructor(
     private http: HttpClient,

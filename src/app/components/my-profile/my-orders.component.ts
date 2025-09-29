@@ -185,7 +185,7 @@ export class MyOrdersComponent implements OnInit {
   orders: Order[] = [];
   isLoading = true;
   
-  private apiUrl = 'http://localhost:8082/api/orders/my-orders';
+  private apiUrl = 'productId: stringhttps://angecombackend.onrender.com/api/orders/my-orders';
 
   constructor(
     private http: HttpClient,

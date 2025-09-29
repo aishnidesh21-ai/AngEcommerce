@@ -20,7 +20,7 @@ export interface Product {
   providedIn: 'root'
 })
 export class ProductApiService {
-  private apiUrl = 'http://localhost:8082/api/products';
+  private apiUrl = 'productId: stringhttps://angecombackend.onrender.com/api/products';
 
   constructor(
     private http: HttpClient,
