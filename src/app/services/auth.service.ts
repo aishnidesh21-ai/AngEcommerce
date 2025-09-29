@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment';// import environment
 
 export interface User {
   _id?: string;
@@ -36,7 +35,7 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl + '/auth'; // dynamically set from environment
+  private apiUrl = ['http://localhost:8082/api/auth'];
   private tokenKey = 'auth_token';
   private userKey = 'current_user';
   
@@ -47,6 +46,7 @@ export class AuthService {
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient) {
+    // Load user from localStorage on service initialization
     this.loadUserFromStorage();
   }
 
@@ -78,6 +78,7 @@ export class AuthService {
   }
 
   login(credentials: LoginRequest): Observable<AuthResponse> {
+    // Ensure password is a string and not undefined
     const sanitizedLoginData = {
       email: credentials.email,
       password: credentials.password || ''
