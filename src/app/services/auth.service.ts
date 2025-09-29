@@ -35,7 +35,7 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'productId: stringhttps://angecombackend.onrender.com/api/auth';
+  private apiUrl = 'https://angecombackend.onrender.com/api/auth';
   private tokenKey = 'auth_token';
   private userKey = 'current_user';
   
