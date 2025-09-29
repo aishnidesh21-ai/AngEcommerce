@@ -194,7 +194,7 @@ export class AdminDashboardComponent {
     { title: 'Total Products', value: '5500+', icon: 'inventory_2' },
     { title: 'New Orders', value: '500+/Day', icon: 'shopping_cart' },
     { title: 'Active Users', value: '2500+/Day', icon: 'people_alt' },
-    { title: 'Revenue', value: '₹12,500', icon: 'attach_money' }
+    { title: 'Revenue', value: '₹120,00,000', icon: 'attach_money' }
   ];
 
   constructor(
