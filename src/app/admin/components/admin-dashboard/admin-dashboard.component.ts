@@ -154,7 +154,7 @@ import { Router } from '@angular/router';
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
     .card-icon {
-      font-size: 40px;
+      font-size: 30px;
       color: #1976d2;
       margin-right: 16px;
     }
@@ -191,10 +191,10 @@ export class AdminDashboardComponent {
   isDesktop = window.innerWidth > 960;
 
   cards = [
-    { title: 'Total Products', value: '120', icon: 'inventory_2' },
-    { title: 'New Orders', value: '45', icon: 'shopping_cart' },
-    { title: 'Active Users', value: '300', icon: 'people_alt' },
-    { title: 'Revenue', value: '$12,500', icon: 'attach_money' }
+    { title: 'Total Products', value: '5500+', icon: 'inventory_2' },
+    { title: 'New Orders', value: '500+/Day', icon: 'shopping_cart' },
+    { title: 'Active Users', value: '2500+/Day', icon: 'people_alt' },
+    { title: 'Revenue', value: '₹12,500', icon: 'attach_money' }
   ];
 
   constructor(
